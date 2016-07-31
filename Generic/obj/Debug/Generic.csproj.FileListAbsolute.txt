@@ -1,0 +1,14 @@
+D:\Project\WCFService\WCFService\Generic\bin\Debug\Generic.dll
+D:\Project\WCFService\WCFService\Generic\bin\Debug\Generic.pdb
+D:\Project\WCFService\WCFService\Generic\obj\Debug\Generic.dll
+D:\Project\WCFService\WCFService\Generic\obj\Debug\Generic.pdb
+D:\Project\WCFService\WCFService\Generic\obj\Debug\Generic.csprojResolveAssemblyReference.cache
+D:\Project\Mine\WebDisk\WebDisk\Generic\bin\Debug\Generic.dll
+D:\Project\Mine\WebDisk\WebDisk\Generic\bin\Debug\Generic.pdb
+D:\Project\Mine\WebDisk\WebDisk\Generic\obj\Debug\Generic.dll
+D:\Project\Mine\WebDisk\WebDisk\Generic\obj\Debug\Generic.pdb
+D:\Project\MyProject\C#\Common\Generic\bin\Debug\Generic.dll
+D:\Project\MyProject\C#\Common\Generic\bin\Debug\Generic.pdb
+D:\Project\MyProject\C#\Common\Generic\obj\Debug\Generic.csprojResolveAssemblyReference.cache
+D:\Project\MyProject\C#\Common\Generic\obj\Debug\Generic.dll
+D:\Project\MyProject\C#\Common\Generic\obj\Debug\Generic.pdb
