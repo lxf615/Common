@@ -7,8 +7,3 @@ D:\Project\MyProject\WebDisk\WebDisk\Generic\bin\Release\Generic.dll
 D:\Project\MyProject\WebDisk\WebDisk\Generic\bin\Release\Generic.pdb
 D:\Project\MyProject\WebDisk\WebDisk\Generic\obj\Release\Generic.dll
 D:\Project\MyProject\WebDisk\WebDisk\Generic\obj\Release\Generic.pdb
-D:\Project\MyProject\C#\Common\Generic\bin\Release\Generic.dll
-D:\Project\MyProject\C#\Common\Generic\bin\Release\Generic.pdb
-D:\Project\MyProject\C#\Common\Generic\obj\Release\Generic.csprojResolveAssemblyReference.cache
-D:\Project\MyProject\C#\Common\Generic\obj\Release\Generic.dll
-D:\Project\MyProject\C#\Common\Generic\obj\Release\Generic.pdb

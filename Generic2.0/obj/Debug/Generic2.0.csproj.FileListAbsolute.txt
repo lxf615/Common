@@ -32,8 +32,3 @@ D:\Project\MyProject\WebDisk\WebDisk\Generic2.0\bin\Debug\Generic2.0.pdb
 D:\Project\MyProject\WebDisk\WebDisk\Generic2.0\obj\Debug\Generic2.0.dll
 D:\Project\MyProject\WebDisk\WebDisk\Generic2.0\obj\Debug\Generic2.0.pdb
 D:\Project\MyProject\WebDisk\WebDisk\Generic2.0\obj\Debug\Generic2.0.csprojResolveAssemblyReference.cache
-D:\Project\MyProject\C#\Common\Generic2.0\bin\Debug\Generic2.0.dll
-D:\Project\MyProject\C#\Common\Generic2.0\bin\Debug\Generic2.0.pdb
-D:\Project\MyProject\C#\Common\Generic2.0\obj\Debug\Generic2.0.dll
-D:\Project\MyProject\C#\Common\Generic2.0\obj\Debug\Generic2.0.pdb
-D:\Project\MyProject\C#\Common\Generic2.0\obj\Debug\Generic2.0.csprojResolveAssemblyReference.cache
