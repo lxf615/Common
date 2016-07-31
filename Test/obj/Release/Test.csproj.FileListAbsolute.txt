@@ -1,0 +1,10 @@
+D:\Project\MyProject\C#\Common\Test\bin\Release\Test.exe
+D:\Project\MyProject\C#\Common\Test\bin\Release\Test.pdb
+D:\Project\MyProject\C#\Common\Test\bin\Release\Generic2.0.dll
+D:\Project\MyProject\C#\Common\Test\bin\Release\Generic2.0.pdb
+D:\Project\MyProject\C#\Common\Test\bin\Release\Generic2.0.xml
+D:\Project\MyProject\C#\Common\Test\obj\Release\Test.csprojResolveAssemblyReference.cache
+D:\Project\MyProject\C#\Common\Test\obj\Release\Test.exe
+D:\Project\MyProject\C#\Common\Test\obj\Release\Test.pdb
+D:\Project\MyProject\C#\Common\Test\bin\Release\Newtonsoft.Json.dll
+D:\Project\MyProject\C#\Common\Test\bin\Release\Newtonsoft.Json.xml
