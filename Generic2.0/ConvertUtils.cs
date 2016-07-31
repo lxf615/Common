@@ -5,24 +5,16 @@ using System.Text;
 
 namespace Generic
 {
-    [Obsolete]
+    /// <summary>
+    /// 通用数据转换工具
+    /// </summary>
     public class ConvertUtils
     {
-        #region DateTime
-        public static DateTime ToDate(string sValue)
-        {
-            try
-            {
-                return DateTime.Parse(sValue);
-            }
-            catch (Exception ex)
-            {
-                return DateTime.MinValue;
-            }
-             
-        }
-        #endregion
-
+        /// <summary>
+        /// 转为字符串
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
         static public string ToString(object o)
         {
             if (o == null) return string.Empty;
@@ -32,23 +24,35 @@ namespace Generic
             return o.ToString();
         }
 
-        static public Decimal ToDecimal(object o)
+        /// <summary>
+        /// 转为小数
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        static public decimal ToDecimal(object o)
         {
-            return ToDecimal(o, (System.Decimal)0);
+            return ToDecimal(o,  0);
         }
-        static public Decimal ToDecimal(object o, decimal defaults)
+
+        /// <summary>
+        /// 转为小数
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="defaults">默认值</param>
+        /// <returns></returns>
+        static public decimal ToDecimal(object o, decimal defaults)
         {
             if (o == null) return defaults;
-            if (o.GetType().Equals(typeof(System.DBNull))) return defaults;
+            if (o.GetType().Equals(typeof(DBNull))) return defaults;
 
-            if (o.GetType().Equals(typeof(System.Single)))
-                return (System.Decimal)(System.Single)o;
+            if (o.GetType().Equals(typeof(float)))
+                return (decimal)(float)o;
 
-            if (o.GetType().Equals(typeof(System.Double)))
-                return (System.Decimal)(System.Double)o;
+            if (o.GetType().Equals(typeof(double)))
+                return (decimal)(double)o;
             try
             {
-                return Decimal.Parse(o.ToString(), System.Globalization.NumberStyles.Currency);
+                return decimal.Parse(o.ToString(), System.Globalization.NumberStyles.Currency);
             }
             catch
             {
@@ -57,20 +61,28 @@ namespace Generic
 
         }
 
-        // Converts any of the database value types (int32, tiny int, byte, etc.) to
-        //  an integer.
+        /// <summary>
+        /// 转为整数
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
         static public int ToInt(object o)
         {
             return ToInt(o, 0);  // if no default provided, we use 0 as defaut if exception occur or null value
         }
-        // Converts any of the database value types (int32, tiny int, byte, etc.) to
-        //  an integer.
+        
+        /// <summary>
+        /// 数据为整数
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="defaultInt">默认值</param>
+        /// <returns></returns>
         static public int ToInt(object o, int defaultInt)
         {
             if (o == null)
                 return defaultInt;
 
-            if (o.GetType().Equals(typeof(System.Boolean)))
+            if (o.GetType().Equals(typeof(bool)))
             {
                 if (((bool)o) == true)
                     return 1;
@@ -78,67 +90,47 @@ namespace Generic
                     return 0;
             }
 
-            if (o.GetType().Equals(typeof(System.Int32)))
+            if (o.GetType().Equals(typeof(int)))
                 return (int)o;
 
             try
             {
-                if (o.GetType().Equals(typeof(System.String)))
+                if (o.GetType().Equals(typeof(string)))
                 {
-                    if (o.ToString().Trim().Length <= 0 || o.ToString().Trim() == string.Empty)
+                    if (string.IsNullOrEmpty(o.ToString().Trim()))
                     {
                         return defaultInt;
                     }
                     else
                     {
-                        return (int)Int32.Parse(o.ToString());
+                        return int.Parse(o.ToString());
                     }
                 }
 
-            }
-            catch (ArgumentNullException)
-            {
-                return defaultInt;
-            }
-            catch (FormatException)
-            {
-                return defaultInt;
-            }
-            catch (OverflowException)
-            {
-                return defaultInt;
-            }
-            catch
-            {
-                return defaultInt;
-            }
 
-            if (o.GetType().Equals(typeof(System.Int16)))
-                return (Int16)o;
+                if (o.GetType().Equals(typeof(short)))
+                    return (short)o;
 
-            if (o.GetType().Equals(typeof(System.Decimal)))
-                return System.Decimal.ToInt32((System.Decimal)o);
+                if (o.GetType().Equals(typeof(decimal)))
+                    return decimal.ToInt32((decimal)o);
 
-            if (o.GetType().Equals(typeof(System.Byte)))
-                return (int)((Byte)o);
+                if (o.GetType().Equals(typeof(byte)))
+                    return ((byte)o);
 
-            if (o.GetType().Equals(typeof(System.Single)))
-                return (int)((Single)o);
+                if (o.GetType().Equals(typeof(float)))
+                    return (int)((float)o);
 
-            if (o.GetType().Equals(typeof(System.DBNull)))
-                return defaultInt;
+                if (o.GetType().Equals(typeof(DBNull)))
+                    return defaultInt;
 
-            if (o.GetType().Equals(typeof(double)))
-                return (int)((double)o);
-            try
-            {
-                return (int)Int32.Parse(o.ToString());
+                if (o.GetType().Equals(typeof(double)))
+                    return (int)((double)o);
+
+                return int.Parse(o.ToString());
             }
             catch
             {
-                // Why THROW ERROR!!!
-                throw (new Exception(String.Format("SQL.ToInt: Can't handle {0}.",
-                   o.GetType().ToString())));
+                return defaultInt;
             }
         }
 

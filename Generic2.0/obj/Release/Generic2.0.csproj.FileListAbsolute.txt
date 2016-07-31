@@ -14,5 +14,4 @@ D:\Project\MyProject\C#\Common\Generic2.0\bin\Release\Generic2.0.dll
 D:\Project\MyProject\C#\Common\Generic2.0\bin\Release\Generic2.0.pdb
 D:\Project\MyProject\C#\Common\Generic2.0\obj\Release\Generic2.0.dll
 D:\Project\MyProject\C#\Common\Generic2.0\obj\Release\Generic2.0.pdb
-D:\Project\MyProject\C#\Common\Generic2.0\bin\Release\Newtonsoft.Json.dll
-D:\Project\MyProject\C#\Common\Generic2.0\bin\Release\Newtonsoft.Json.xml
+D:\Project\MyProject\C#\Common\Generic2.0\obj\Release\Generic2.0.csprojResolveAssemblyReference.cache

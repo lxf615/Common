@@ -4,6 +4,48 @@
         <name>Generic2.0</name>
     </assembly>
     <members>
+        <member name="T:Generic.ConvertUtils">
+            <summary>
+            通用数据转换工具
+            </summary>
+        </member>
+        <member name="M:Generic.ConvertUtils.ToString(System.Object)">
+            <summary>
+            转为字符串
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Generic.ConvertUtils.ToDecimal(System.Object)">
+            <summary>
+            转为小数
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Generic.ConvertUtils.ToDecimal(System.Object,System.Decimal)">
+            <summary>
+            转为小数
+            </summary>
+            <param name="o"></param>
+            <param name="defaults">默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Generic.ConvertUtils.ToInt(System.Object)">
+            <summary>
+            转为整数
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Generic.ConvertUtils.ToInt(System.Object,System.Int32)">
+            <summary>
+            数据为整数
+            </summary>
+            <param name="o"></param>
+            <param name="defaultInt">默认值</param>
+            <returns></returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:Generic.EMail.#ctor(System.String,System.String,System.String,System.String,System.String)" -->
         <!-- Badly formed XML comment ignored for member "M:Generic.EMail.Attachments(System.String)" -->
         <!-- Badly formed XML comment ignored for member "M:Generic.EMail.SendAsync(System.Net.Mail.SendCompletedEventHandler)" -->

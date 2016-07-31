@@ -8,3 +8,4 @@ D:\Project\MyProject\C#\Common\Test\obj\Release\Test.exe
 D:\Project\MyProject\C#\Common\Test\obj\Release\Test.pdb
 D:\Project\MyProject\C#\Common\Test\bin\Release\Newtonsoft.Json.dll
 D:\Project\MyProject\C#\Common\Test\bin\Release\Newtonsoft.Json.xml
+D:\Project\MyProject\C#\Common\Test\bin\Release\Test.exe.config

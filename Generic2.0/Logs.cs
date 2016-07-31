@@ -106,7 +106,7 @@ namespace Generic
                     fileStream.Close();
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 
             }
