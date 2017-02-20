@@ -17,35 +17,18 @@ namespace Generic
         private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
 
 
-        ///// <summary>
-        ///// 创建GET方式的HTTP请求
-        ///// </summary>
-        ///// <param name="url">请求的URL</param>
-        ///// <returns></returns>
-        //public static string GetContent(string url)
-        //{
-        //    CookieCollection cookies = new CookieCollection();
-        //    HttpWebResponse response = Get(url, null, null, cookies);
-        //    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-        //    {
-        //        return reader.ReadToEnd();
-        //    }
-        //}
-
-
         /// <summary>
         /// 创建GET方式的HTTP请求
         /// </summary>
         /// <param name="url">请求的URL</param>
+        /// <param name="parameters">请求的参数</param>
         /// <returns></returns>
         public static HttpWebResponse Get(string url, IDictionary<string, string> parameters)
         {
             CookieCollection cookies = new CookieCollection();
-            HttpWebResponse response = Get(url, parameters,null, null, cookies);
+            HttpWebResponse response = Get(url, parameters, null, null, cookies);
             return response;
         }
-
-
         /// <summary>
         /// 创建POST方式的HTTP请求
         /// </summary>
@@ -79,11 +62,14 @@ namespace Generic
                     }
                     i++;
                 }
-                url += string.Format("?{0}",buffer.ToString());
+                url += string.Format("?{0}", buffer.ToString());
             }
 
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+
             request.Method = "GET";
+            request.Accept = "application/json";
             request.UserAgent = DefaultUserAgent;
             if (!string.IsNullOrEmpty(userAgent))
             {
@@ -98,10 +84,9 @@ namespace Generic
                 request.CookieContainer = new CookieContainer();
                 request.CookieContainer.Add(cookies);
             }
+
             return request.GetResponse() as HttpWebResponse;
         }
-
-
         /// <summary>
         /// 创建POST方式的HTTP请求
         /// </summary>
@@ -112,9 +97,6 @@ namespace Generic
         {
             return Post(url, parameters, null, null, Encoding.UTF8, null);
         }
-
-
-
         /// <summary>
         /// 创建POST方式的HTTP请求
         /// </summary>
@@ -149,6 +131,7 @@ namespace Generic
             }
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
+
 
             if (!string.IsNullOrEmpty(userAgent))
             {
@@ -193,7 +176,6 @@ namespace Generic
             }
             return request.GetResponse() as HttpWebResponse;
         }
-
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
         {
             return true; //总是接受
