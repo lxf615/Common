@@ -6,13 +6,16 @@ using System.Text.RegularExpressions;
 
 namespace Generic
 {
+    /// <summary>
+    /// 字符串类扩展
+    /// </summary>
     public static class StringExtension
     {
         /// <summary>
         /// 将指定格式的字符串转换成日期类型
         /// </summary>
-        /// <param name="sValue"></param>
-        /// <param name="sFormat"></param>
+        /// <param name="sValue">日期字符串</param>
+        /// <param name="sFormat">格式</param>
         /// <returns></returns>
         public static DateTime ToDateTime(this string sValue, string sFormat)
         {
