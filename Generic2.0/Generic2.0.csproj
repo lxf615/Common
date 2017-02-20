@@ -61,6 +61,7 @@
     <Compile Include="EncryptUtils.cs" />
     <Compile Include="EnvironmentUtils.cs" />
     <Compile Include="HttpWebUtils.cs" />
+    <Compile Include="ILog.cs" />
     <Compile Include="ObjectExtension.cs" />
     <Compile Include="StringExtension.cs" />
     <Compile Include="FileUtils.cs" />

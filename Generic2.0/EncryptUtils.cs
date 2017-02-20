@@ -124,53 +124,7 @@ namespace Generic
 
         #endregion
 
-        #region MD5加密
-        /// <summary>
-        /// 取得字符串的md5加密串
-        /// </summary>
-        /// <param name="str">原字符串</param>
-        /// <param name="encoding">编码集,如GB2312等</param>
-        /// <returns></returns>
-        static public string GetMD5String(string str, Encoding encoding)
-        {
-            if (string.IsNullOrEmpty(str))
-            {
-                return string.Empty;
-            }
-
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] t = md5.ComputeHash(encoding.GetBytes(str));
-            StringBuilder reString = new StringBuilder(32);
-            for (int i = 0; i < t.Length; i++)
-            {
-                reString.Append(t[i].ToString("x").PadLeft(2, '0'));
-            }
-            return reString.ToString();
-        }
-
-        /// 取得字符串的md5加密串 
-        /// <summary>
-        /// 取得字符串的md5加密串
-        /// </summary>
-        /// <param name="str">原字符串</param>
-        /// <param name="encodingString">编码集,如GB2312等</param>
-        /// <returns></returns>
-        static public string GetMD5String(string str, string encodingString)
-        {
-            return GetMD5String(str, Encoding.GetEncoding(encodingString));
-        }
- 
-        /// <summary>
-        /// 取得字符串的md5加密串
-        /// </summary>
-        /// <param name="str">原字符串</param>
-        /// <returns></returns>
-        static public string GetMD5String(string str)
-        {
-            return GetMD5String(str, Encoding.UTF8);
-        }
-
-        #endregion
+        
 
         #region Password
         /// <summary>

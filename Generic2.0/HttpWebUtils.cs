@@ -16,6 +16,18 @@ namespace Generic
     {
         private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
 
+        private ILog logger = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        public HttpWebUtils(ILog logger)
+        {
+            this.logger = logger;
+        }
+
+        
+
 
         /// <summary>
         /// 创建GET方式的HTTP请求
@@ -23,22 +35,22 @@ namespace Generic
         /// <param name="url">请求的URL</param>
         /// <param name="parameters">请求的参数</param>
         /// <returns></returns>
-        public static HttpWebResponse Get(string url, IDictionary<string, string> parameters)
+        public HttpWebResponse Get(string url, IDictionary<string, string> parameters)
         {
             CookieCollection cookies = new CookieCollection();
             HttpWebResponse response = Get(url, parameters, null, null, cookies);
             return response;
         }
         /// <summary>
-        /// 创建POST方式的HTTP请求
+        /// 创建Get方式的HTTP请求
         /// </summary>
         /// <param name="url">请求的URL</param>
-        /// <param name="parameters">随同请求POST的参数名称及参数值字典</param>
+        /// <param name="parameters">随同请求的Get参数名称及参数值字典</param>
         /// <param name="timeout">请求的超时时间</param>
         /// <param name="userAgent">请求的客户端浏览器信息，可以为空</param>
         /// <param name="cookies">随同HTTP请求发送的Cookie信息，如果不需要身份验证可以为空</param>
         /// <returns></returns>
-        public static HttpWebResponse Get(string url, IDictionary<string, string> parameters, int? timeout, string userAgent, CookieCollection cookies)
+        public HttpWebResponse Get(string url, IDictionary<string, string> parameters, int? timeout, string userAgent, CookieCollection cookies)
         {
             if (string.IsNullOrEmpty(url))
             {
@@ -65,6 +77,11 @@ namespace Generic
                 url += string.Format("?{0}", buffer.ToString());
             }
 
+            if (logger!=null)
+            {
+                logger.Info(string.Format("Get请求参数:{0}", url));
+            }
+           
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
 
@@ -93,7 +110,7 @@ namespace Generic
         /// <param name="url">请求的URL</param>
         /// <param name="parameters">随同请求POST的参数名称及参数值字典</param>
         /// <returns></returns>
-        public static HttpWebResponse Post(string url, IDictionary<string, string> parameters)
+        public HttpWebResponse Post(string url, IDictionary<string, string> parameters)
         {
             return Post(url, parameters, null, null, Encoding.UTF8, null);
         }
@@ -107,7 +124,7 @@ namespace Generic
         /// <param name="requestEncoding">发送HTTP请求时所用的编码</param>
         /// <param name="cookies">随同HTTP请求发送的Cookie信息，如果不需要身份验证可以为空</param>
         /// <returns></returns>
-        public static HttpWebResponse Post(string url, IDictionary<string, string> parameters, int? timeout, string userAgent, Encoding requestEncoding, CookieCollection cookies)
+        public HttpWebResponse Post(string url, IDictionary<string, string> parameters, int? timeout, string userAgent, Encoding requestEncoding, CookieCollection cookies)
         {
             if (string.IsNullOrEmpty(url))
             {
@@ -168,6 +185,12 @@ namespace Generic
                     }
                     i++;
                 }
+
+                if (logger != null)
+                {
+                    logger.Info(string.Format("Post请求参数:{0}", buffer.ToString()));
+                }
+
                 byte[] data = requestEncoding.GetBytes(buffer.ToString());
                 using (Stream stream = request.GetRequestStream())
                 {
@@ -176,7 +199,7 @@ namespace Generic
             }
             return request.GetResponse() as HttpWebResponse;
         }
-        private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
+        private bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
         {
             return true; //总是接受
         }

@@ -32,7 +32,9 @@ namespace Generic
         // 校验码
         private static List<int> checkDigit = new List<int>() { 1, 0, 'X', 9, 8, 7, 6,
             5, 4, 3, 2 };
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IDCard()
         {
         }
