@@ -119,7 +119,7 @@ namespace Generic
                 for (int i = 0; i < 17; i++)
                 {
                     String k = eighteenCardID.Substring(i, 1);
-                    a[i] = ConvertUtils.ToInt(k);
+                    a[i] = k.ToInt();
                 }
                 for (int i = 0; i < 17; i++)
                 {

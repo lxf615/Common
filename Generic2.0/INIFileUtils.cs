@@ -8,6 +8,9 @@ using System.Runtime.InteropServices;
 
 namespace Generic
 {
+    /// <summary>
+    /// INI配置类
+    /// </summary>
     public class INIFileUtils
     {
         #region INI File
@@ -19,11 +22,13 @@ namespace Generic
         #endregion
 
         /// <summary>
-        /// 写INI文件
+        ///写INI文件 
         /// </summary>
-        /// <param name="Section"></param>
-        /// <param name="Ident"></param>
-        /// <param name="Value"></param>
+        /// <param name="filePath"></param>
+        /// <param name="section"></param>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public bool WriteString(string filePath, string section, string key, string defaultValue)
         {
             return WritePrivateProfileString(section, key, defaultValue, filePath);
@@ -31,12 +36,11 @@ namespace Generic
 
 
         /// <summary>
-        ///  读取INI文件指定
+        /// 读取INI文件指定
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="section"></param>
         /// <param name="key"></param>
-        /// <param name="defaultValue"></param>
         /// <returns></returns>
         public static string ReadString(string filePath, string section, string key)
         {
@@ -46,6 +50,7 @@ namespace Generic
         /// <summary>
         /// 读整数
         /// </summary>
+        /// <param name="filePath"></param>
         /// <param name="section"></param>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -57,6 +62,7 @@ namespace Generic
         /// <summary>
         /// 读整数
         /// </summary>
+        /// <param name="filePath"></param>
         /// <param name="section"></param>
         /// <param name="key"></param>
         /// <param name="defaultValue"></param>
@@ -66,7 +72,7 @@ namespace Generic
             string retValue = ReadString(filePath, section, key, Convert.ToString(defaultValue));
             try
             {
-                return ConvertUtils.ToInt(retValue);
+                return retValue.ToInt();
 
             }
             catch
