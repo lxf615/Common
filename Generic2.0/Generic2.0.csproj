@@ -58,13 +58,12 @@
   <ItemGroup>
     <Compile Include="DateTimeExtension.cs" />
     <Compile Include="EMail.cs" />
-    <Compile Include="EncryptUtils.cs" />
-    <Compile Include="EnvironmentUtils.cs" />
+    <Compile Include="IOExtension.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="HttpWebUtils.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="ObjectExtension.cs" />
     <Compile Include="StringExtension.cs" />
-    <Compile Include="FileUtils.cs" />
     <Compile Include="IDCard.cs" />
     <Compile Include="INIFileUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
