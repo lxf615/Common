@@ -1,16 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Security.Cryptography;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Xml;
+using System.Runtime.Serialization;
 
 namespace Generic
 {
     public class Utils
     {
+        #region XML
+        /// <summary>
+        /// 将对象序列化成XML
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string Serialize<T>(T obj)
+        {
+            DataContractSerializer serializer = new DataContractSerializer(typeof(T));
+            MemoryStream stream = new MemoryStream();
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Encoding = Encoding.UTF8;
+            using (XmlWriter writer = XmlWriter.Create(stream, settings))
+            {
+                serializer.WriteObject(writer, obj);
+            }
+
+            return Encoding.UTF8.GetString(stream.ToArray());
+        }
+        #endregion
+
         #region Password
         /// <summary>
         /// 随机密码
@@ -44,6 +66,10 @@ namespace Generic
         //    return System.Environment.CurrentDirectory;
         //}
 
+        /// <summary>
+        /// 获取程序根据目录
+        /// </summary>
+        /// <returns></returns>
         public static string GetBaseDirectory()
         {
             return System.AppDomain.CurrentDomain.BaseDirectory;

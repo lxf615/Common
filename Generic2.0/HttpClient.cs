@@ -12,7 +12,7 @@ namespace Generic
     /// <summary>
     /// 有关HTTP请求的辅助类
     /// </summary>
-    public class HttpWebUtils
+    public class HttpClient
     {
         private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
 
@@ -21,7 +21,7 @@ namespace Generic
         /// 
         /// </summary>
         /// <param name="logger"></param>
-        public HttpWebUtils(ILog logger)
+        public HttpClient(ILog logger)
         {
             this.logger = logger;
         }

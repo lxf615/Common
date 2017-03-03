@@ -60,14 +60,13 @@
     <Compile Include="EMail.cs" />
     <Compile Include="IOExtension.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="HttpWebUtils.cs" />
+    <Compile Include="HttpClient.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="ObjectExtension.cs" />
     <Compile Include="StringExtension.cs" />
     <Compile Include="IDCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectorUtils.cs" />
-    <Compile Include="XmlUtils.cs" />
+    <Compile Include="ReflectorExtension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
