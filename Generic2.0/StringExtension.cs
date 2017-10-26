@@ -154,6 +154,134 @@ namespace Generic
         }
         #endregion
 
+        #region TDES/3DES加解密
+        /// <summary>
+        /// TDES/3DES加密,UTF8编码
+        /// Key24字节,IV的前8个字节
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns>Base64字符串</returns>
+        public static string DES3Encrypt(this string data, string key)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return data;
+            }
+
+            byte[] buffer = Encoding.UTF8.GetBytes(data);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] ivBytes = new byte[8];
+            Array.Copy(keyBytes,ivBytes,8);
+
+            return Convert.ToBase64String(buffer.DES3Encrypt(keyBytes, ivBytes));
+        }
+
+        /// <summary>
+        /// TDES/3DES加密,UTF8编码
+        /// </summary>
+        /// <param name="data">明文</param>
+        /// <param name="key">Key24字节,UTF8编码</param>
+        /// <param name="iv">8个字节,UTF8编码</param>
+        /// <returns>结果Base64编码</returns>
+        public static string DES3Encrypt(this string data, string key,string iv)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return data;
+            }
+
+            byte[] buffer = Encoding.UTF8.GetBytes(data);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
+
+            return Convert.ToBase64String(buffer.DES3Encrypt(keyBytes, ivBytes));
+        }
+
+        /// <summary>
+        /// TDES/3DES加密
+        /// Key24字节,IV是Key前8个字节
+        /// </summary>
+        /// <param name="buffer">明文</param>
+        /// <param name="key">私钥</param>
+        /// <param name="iv">偏移量</param>
+        /// <returns></returns>
+        public static byte[] DES3Encrypt(this byte[] buffer, byte[] key,byte[] iv)
+        {
+            TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+            DES.Key = key;
+            DES.IV = iv;
+            DES.Mode = CipherMode.CBC;
+            DES.Padding = PaddingMode.PKCS7;
+
+            ICryptoTransform DESEncrypt = DES.CreateEncryptor();
+
+            return DESEncrypt.TransformFinalBlock(buffer, 0, buffer.Length);
+        }
+
+        /// <summary>
+        /// TDES/3DES加密,UFT8编码
+        /// Key24字节,IV是Key前8个字节
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string DES3Decrypt(this string data, string key)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return data;
+            }
+
+            TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] ivBytes = new byte[8];
+            Array.Copy(keyBytes, ivBytes, ivBytes.Length);
+            byte[] buffer = Convert.FromBase64String(data);
+
+            byte[] result = buffer.DES3Decrypt(keyBytes, ivBytes);
+            if (result != null)
+            {
+                return Encoding.UTF8.GetString(result);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// TDES/3DES加密,
+        /// Key24字节,IV是Key前8个字节
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="key"></param>
+        /// <param name="iv"></param>
+        /// <returns></returns>
+        public static byte[] DES3Decrypt(this byte[] buffer, byte[] key,byte[] iv)
+        {
+            TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+            DES.Key = key;
+            DES.IV = iv;
+            DES.Mode = CipherMode.CBC;
+            DES.Padding = PaddingMode.PKCS7;
+
+            ICryptoTransform desDecrypt = DES.CreateDecryptor();
+
+            try
+            {
+                return desDecrypt.TransformFinalBlock(buffer, 0, buffer.Length);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         #region Base64
         /// <summary>
         /// Base64编码,UTF8编码
@@ -190,10 +318,21 @@ namespace Generic
         #endregion
 
         #region byte
+        /// <summary>
+        /// 转换成字节编码，UTF8
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static byte[] ToBytes(this string value)
         {
             return ToBytes(value, Encoding.UTF8);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
         public static byte[] ToBytes(this string value, Encoding encoding)
         {
             return encoding.GetBytes(value);
@@ -286,34 +425,6 @@ namespace Generic
 
         #endregion
 
-        #region DEC
-        /// <summary>
-        /// DEC解密
-        /// </summary>
-        /// <param name="pToDecrypt"></param>
-        /// <param name="sKey"></param>
-        /// <returns></returns>
-        public static string Decrypt(this string value, string sKey)
-        {
-            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
-            byte[] inputByteArray = new byte[value.Length / 2];
-            for (int x = 0; x < value.Length / 2; x++)
-            {
-                int i = (Convert.ToInt32(value.Substring(x * 2, 2), 16));
-                inputByteArray[x] = (byte)i;
-            }
-            des.Key = ASCIIEncoding.ASCII.GetBytes(sKey);  //建立加密对象的密钥和偏移量，此值重要，不能修改  
-            des.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
-            MemoryStream ms = new MemoryStream();
-            CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
-            cs.Write(inputByteArray, 0, inputByteArray.Length);
-            cs.FlushFinalBlock();
-            StringBuilder ret = new StringBuilder();  //建立StringBuild对象，CreateDecrypt使用的是流对象，必须把解密后的文本变成流对象     
-            return System.Text.Encoding.UTF8.GetString(ms.ToArray());
-        }
-
-        #endregion
-
         #region SQL转换
         /// <summary>
         /// SQL转换.添加单引号,防SQL注入
@@ -332,6 +443,21 @@ namespace Generic
         }
         #endregion
 
-        
+        #region HMAC-SHA1加密
+        /// <summary>
+        /// HMAC-SHA1加密,UTF8编码
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string Sha1Encode(this string data, string key)
+        {
+            byte[] bytesKey = Encoding.UTF8.GetBytes(key);
+            HMACSHA1 myhmacsha1 = new HMACSHA1(bytesKey);
+            byte[] byteArray = Encoding.UTF8.GetBytes(data);
+            MemoryStream stream = new MemoryStream(byteArray);
+            return Convert.ToBase64String(myhmacsha1.ComputeHash(stream));
+        }
+        #endregion
     }
 }
